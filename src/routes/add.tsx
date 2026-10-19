@@ -25,6 +25,39 @@ const EXAMPLES = [
   "https://www.imdi.no/tilskudd/",
 ];
 
+const edit = (set: (l: Row[]) => void, list: Row[], i: number, patch: Partial<Row>) =>
+    set(list.map((x, j) => (j === i ? { ...x, ...patch } : x)));
+
+function FieldRow({ r, i, list, set, multiline }: { r: Row; i: number; list: Row[]; set: (l: Row[]) => void; multiline?: boolean }) {
+  return (
+    <div className={`rounded-xl border p-4 ${r.removed ? "opacity-50" : ""} ${!r.verified && !r.touched && !r.removed ? "border-cond-fg" : "border-line"}`}>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <label htmlFor={r.key} className="font-semibold">{r.label}</label>
+        <div className="flex items-center gap-2 text-sm">
+          {!r.value && !r.removed && <span className="rounded-full bg-unk-bg px-2 py-0.5 text-unk-fg">Not stated</span>}
+          {r.value && !r.verified && !r.touched && !r.removed && <span className="rounded-full bg-cond-bg px-2 py-0.5 text-cond-fg"><span aria-hidden="true">! </span>Unverified</span>}
+          {r.value && r.verified && !r.touched && <span className="rounded-full bg-met-bg px-2 py-0.5 text-met-fg"><span aria-hidden="true">✓ </span>Found on page</span>}
+          {r.touched && <span className="rounded-full bg-sky px-2 py-0.5">Edited by you</span>}
+          <button type="button" className="underline" onClick={() => edit(set, list, i, { removed: !r.removed })}>{r.removed ? "Keep" : "Remove"}</button>
+        </div>
+      </div>
+      {!r.removed && (
+        <>
+          {multiline ? (
+            <textarea id={r.key} rows={2} className="mt-2 w-full rounded-lg border border-line bg-surface p-2" value={r.value} onChange={(e) => edit(set, list, i, { value: e.target.value, touched: true })} />
+          ) : (
+            <input id={r.key} className="mt-2 min-h-11 w-full rounded-lg border border-line bg-surface px-3" value={r.value} onChange={(e) => edit(set, list, i, { value: e.target.value, touched: true })} />
+          )}
+          {r.excerpt && (
+            <p className="mt-2 border-l-2 border-line pl-3 text-sm text-muted"><span className="font-semibold text-text">From the page: </span>“{r.excerpt}”</p>
+          )}
+          {r.value && !r.verified && !r.touched && <p className="mt-1 text-sm text-cond-fg">We could not find this wording on the page. Edit or remove it before approving.</p>}
+        </>
+      )}
+    </div>
+  );
+}
+
 function AddPage() {
   const { addGrant, log } = useStore();
   const nav = useNavigate();
@@ -110,37 +143,6 @@ function AddPage() {
     log("extraction_reviewed", `approved: ${g.title}`);
     nav({ to: "/grants/$slug", params: { slug } });
   };
-
-  const edit = (set: typeof setRows, list: Row[], i: number, patch: Partial<Row>) =>
-    set(list.map((x, j) => (j === i ? { ...x, ...patch } : x)));
-
-  const FieldRow = ({ r, i, list, set, multiline }: { r: Row; i: number; list: Row[]; set: (l: Row[]) => void; multiline?: boolean }) => (
-    <div className={`rounded-xl border p-4 ${r.removed ? "opacity-50" : ""} ${!r.verified && !r.touched && !r.removed ? "border-cond-fg" : "border-line"}`}>
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <label htmlFor={r.key} className="font-semibold">{r.label}</label>
-        <div className="flex items-center gap-2 text-sm">
-          {!r.value && !r.removed && <span className="rounded-full bg-unk-bg px-2 py-0.5 text-unk-fg">Not stated</span>}
-          {r.value && !r.verified && !r.touched && !r.removed && <span className="rounded-full bg-cond-bg px-2 py-0.5 text-cond-fg"><span aria-hidden="true">! </span>Unverified</span>}
-          {r.value && r.verified && !r.touched && <span className="rounded-full bg-met-bg px-2 py-0.5 text-met-fg"><span aria-hidden="true">✓ </span>Found on page</span>}
-          {r.touched && <span className="rounded-full bg-sky px-2 py-0.5">Edited by you</span>}
-          <button type="button" className="underline" onClick={() => edit(set as typeof setRows, list, i, { removed: !r.removed })}>{r.removed ? "Keep" : "Remove"}</button>
-        </div>
-      </div>
-      {!r.removed && (
-        <>
-          {multiline ? (
-            <textarea id={r.key} rows={2} className="mt-2 w-full rounded-lg border border-line bg-surface p-2" value={r.value} onChange={(e) => edit(set as typeof setRows, list, i, { value: e.target.value, touched: true })} />
-          ) : (
-            <input id={r.key} className="mt-2 min-h-11 w-full rounded-lg border border-line bg-surface px-3" value={r.value} onChange={(e) => edit(set as typeof setRows, list, i, { value: e.target.value, touched: true })} />
-          )}
-          {r.excerpt && (
-            <p className="mt-2 border-l-2 border-line pl-3 text-sm text-muted"><span className="font-semibold text-text">From the page: </span>“{r.excerpt}”</p>
-          )}
-          {r.value && !r.verified && !r.touched && <p className="mt-1 text-sm text-cond-fg">We could not find this wording on the page. Edit or remove it before approving.</p>}
-        </>
-      )}
-    </div>
-  );
 
   return (
     <div className="max-w-3xl">

@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { draftApplication } from "@/lib/ai.functions";
 import { useStore } from "@/lib/store";
 import { deadlineState, evaluateGrant, formatDate, type Grant, type Profile } from "@/lib/evaluate";
 import { labelFor } from "@/lib/profile";
@@ -44,6 +46,9 @@ function Detail() {
   const g = grants.find((x) => x.slug === slug);
   const [ticks, setTicks] = useState([false, false, false]);
   const [copied, setCopied] = useState("");
+  const draftFn = useServerFn(draftApplication);
+  const [drafting, setDrafting] = useState(false);
+  const [draftErr, setDraftErr] = useState(false);
 
   if (!g)
     return (
@@ -61,6 +66,21 @@ function Detail() {
     .map((r, i) => ({ r, res: results[i]!, id: `req-${i}` }))
     .filter((x) => x.res.status === "conditional" || x.res.status === "unknown");
   const items = [...todo.map((t) => ({ id: t.id, text: `${t.r.text}: ${t.res.reason}` })), { id: "docs", text: "Read what documents the funder requires" }];
+
+  const makeDraft = async () => {
+    setDrafting(true);
+    setDraftErr(false);
+    try {
+      const clean = Object.fromEntries(Object.entries(profile).filter(([, v]) => typeof v === "string")) as Record<string, string>;
+      const r = await draftFn({ data: { slug: g.slug, profile: clean, aim: g.aim } });
+      if (r.ok) { updateApp(g.slug, { draft_text: r.text }); log("draft_generated", g.title); }
+      else setDraftErr(true);
+    } catch {
+      setDraftErr(true);
+    } finally {
+      setDrafting(false);
+    }
+  };
 
   const confirm = () => {
     const at = new Date().toISOString();
@@ -136,12 +156,16 @@ function Detail() {
               Built only from your profile and the funder’s stated aim. Bracketed parts are facts we do not have yet. Edit before you use it.
             </p>
             {app.draft_text === undefined ? (
-              <button
-                className={`${btn} mt-3`}
-                onClick={() => { updateApp(g.slug, { draft_text: templateDraft(profile, g) }); log("draft_generated", g.title); }}
-              >
-                Create starting text
-              </button>
+              <div className="mt-3">
+                <button className={btn} disabled={drafting} onClick={makeDraft}>{drafting ? "Writing a starting text…" : "Draft a starting text with AI"}</button>
+                <div role="status" aria-live="polite" className="sr-only">{drafting ? "Writing a starting text." : ""}</div>
+                {draftErr && (
+                  <div role="alert" className="mt-3 rounded-lg bg-notmet-bg p-3 text-notmet-fg">
+                    We could not generate a draft. Your profile is saved. Try again in a moment.{" "}
+                    <button className="font-semibold underline" onClick={() => { updateApp(g.slug, { draft_text: templateDraft(profile, g) }); log("draft_generated", `${g.title} (template)`); setDraftErr(false); }}>Use the basic template instead</button>
+                  </div>
+                )}
+              </div>
             ) : (
               <>
                 <label className="mt-3 block text-sm font-medium" htmlFor="draft">Starting text</label>
@@ -154,6 +178,7 @@ function Detail() {
                 />
                 <div className="mt-2 flex items-center gap-3">
                   <button className={btnGhost} onClick={async () => { await navigator.clipboard.writeText(app.draft_text ?? ""); setCopied("Copied"); setTimeout(() => setCopied(""), 1500); }}>Copy text</button>
+                  <button className={btnGhost} onClick={() => updateApp(g.slug, { draft_text: undefined })}>Start over</button>
                   <span role="status" aria-live="polite" className="text-sm text-teal">{copied}</span>
                 </div>
               </>

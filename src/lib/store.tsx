@@ -9,7 +9,7 @@ export type Application = {
   status: "draft" | "verified";
   verified_at?: string | undefined;
   match_snapshot?: unknown;
-  draft_text?: string;
+  draft_text?: string | undefined;
 };
 type State = {
   profile: Profile;

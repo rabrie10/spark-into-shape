@@ -1,0 +1,705 @@
+[
+ {
+  "slug": "erasmus-youth-cb",
+  "title": "Erasmus+ capacity building in the field of youth",
+  "funder": "European Commission, EACEA. Call ID ERASMUS-YOUTH-2026-CB",
+  "source_url": "https://erasmus-plus.ec.europa.eu/programme-guide/part-b/key-action-2/capacity-youth",
+  "source_type": "official",
+  "aim": "strengthening youth organisations, mainly in partner countries outside the programme, through international cooperation",
+  "amount_text": "Lump sum at an 80% funding rate. Maximum EU contribution €300,000 for the Western Balkans, Eastern Neighbourhood and Southern Mediterranean, or €450,000 for Sub-Saharan Africa.",
+  "documents_text": "Application documents are not listed on this page. Check the call on the EU Funding & Tenders Portal. Projects must score at least 60 points overall and at least half of the maximum in each award category.",
+  "deadline": {
+   "kind": "fixed",
+   "iso": "2026-02-26",
+   "inferred": true,
+   "text": "26 February, 17:00 Brussels time. The page gives no year, but the call ID says 2026, so this round has almost certainly closed."
+  },
+  "retrieved_on": "2026-10-19",
+  "requirements": [
+   {
+    "text": "Applicant is an NGO or public body working in the field of youth",
+    "evidence_excerpt": "The page names youth NGOs, national youth councils and public bodies in the youth field as eligible applicants.",
+    "rule": [
+     {
+      "if": {
+       "youth": "yes"
+      },
+      "out": [
+       "met",
+       "Your profile says you work with young people."
+      ]
+     },
+     {
+      "if": {
+       "youth": "no"
+      },
+      "out": [
+       "not_met",
+       "Your profile says you do not work in the youth field."
+      ]
+     },
+     {
+      "out": [
+       "unknown",
+       "Confirm that youth work is a core activity."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Legally established in an eligible country",
+    "evidence_excerpt": "Applicants must be established in an EU Member State or a country associated to the programme. The page refers to Part A for the country list. That Norway counts as associated is general knowledge, not something this page states.",
+    "rule": [
+     {
+      "if": {
+       "location": [
+        "oslo",
+        "norway"
+       ]
+      },
+      "out": [
+       "met",
+       "Norwegian organisation. Confirm Norway’s status in Part A, “Eligible countries”."
+      ]
+     },
+     {
+      "out": [
+       "unknown",
+       "Check your country in Part A, “Eligible countries”."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Consortium of at least four applicants, with two from different partner countries in one region",
+    "evidence_excerpt": "Proposals need a consortium of at least four applicants: at least one from an EU or associated country and at least two from different eligible third countries in the same region. Cross-regional projects are not eligible.",
+    "rule": [
+     {
+      "if": {
+       "partners": "two"
+      },
+      "out": [
+       "unknown",
+       "Your partner countries are covered. Confirm that you reach four applicants in total."
+      ]
+     },
+     {
+      "if": {
+       "partners": "one"
+      },
+      "out": [
+       "conditional",
+       "You need a second partner country in the same region, and four applicants in total."
+      ]
+     },
+     {
+      "if": {
+       "partners": "none"
+      },
+      "out": [
+       "conditional",
+       "You cannot apply alone. You need four applicants, including two from different partner countries in one region."
+      ]
+     },
+     {
+      "out": [
+       "unknown",
+       "Clarify which partners you could involve outside the EU and EEA."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Project mainly strengthens youth organisations in the partner countries",
+    "evidence_excerpt": "Activities must build the capacity of youth organisations, principally in the non-associated partner countries.",
+    "rule": [
+     {
+      "out": [
+       "unknown",
+       "This needs your judgement. The project idea must mainly serve the partner organisations, not only your own work."
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "slug": "oslo-integration-voluntary",
+  "title": "Oslo: grants for integration work by voluntary organisations",
+  "funder": "Oslo kommune, Velferdsetaten",
+  "source_url": "https://www.oslo.kommune.no/tilskudd-legater-og-stipend/tilskudd-til-integreringsarbeid-i-regi-av-frivillige-organisasjoner/",
+  "source_type": "official",
+  "aim": "participation and integration of people with immigrant background in society and working life",
+  "amount_text": "Not stated on the page we read.",
+  "documents_text": "Organisations that receive NOK 200,000 or more must later file a report checked by a state-authorised auditor. Reporting uses the scheme’s own form. The list of application documents was not in what we read.",
+  "deadline": {
+   "kind": "closed",
+   "text": "The page says the deadline for 2026 has passed. It gives no date for the next round."
+  },
+  "retrieved_on": "2026-10-19",
+  "requirements": [
+   {
+    "text": "Registered in Frivillighetsregisteret",
+    "evidence_excerpt": "Voluntary organisations registered in Frivillighetsregisteret can apply.",
+    "rule": [
+     {
+      "if": {
+       "registered": "yes"
+      },
+      "out": [
+       "met",
+       "Your profile says you are registered."
+      ]
+     },
+     {
+      "if": {
+       "registered": "no"
+      },
+      "out": [
+       "not_met",
+       "Registration is required to apply."
+      ]
+     },
+     {
+      "out": [
+       "unknown",
+       "Check whether you are registered."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Project is carried out in Oslo",
+    "evidence_excerpt": "The project must be carried out in Oslo in the grant year.",
+    "rule": [
+     {
+      "if": {
+       "location": "oslo"
+      },
+      "out": [
+       "met",
+       "You are based in Oslo."
+      ]
+     },
+     {
+      "out": [
+       "conditional",
+       "Eligible only if the project itself takes place in Oslo."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Project supports the scheme’s integration goals",
+    "evidence_excerpt": "The aim is participation and integration of people with immigrant background in society and working life. The page lists specific goals a project must support. We read only part of that list.",
+    "rule": [
+     {
+      "if": {
+       "focus": "integration"
+      },
+      "out": [
+       "unknown",
+       "Your focus looks aligned. Check your project against the full goal list on the page."
+      ]
+     },
+     {
+      "if": {
+       "focus": "youth"
+      },
+      "out": [
+       "unknown",
+       "Fits only if the project serves people with immigrant background."
+      ]
+     },
+     {
+      "out": [
+       "not_met",
+       "Your main field is not integration work."
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "slug": "oslo-immigrant-orgs-core",
+  "title": "Oslo: core funding for local immigrant organisations",
+  "funder": "Oslo kommune, Velferdsetaten",
+  "source_url": "https://www.oslo.kommune.no/tilskudd-legater-og-stipend/drift-av-lokale-innvandrerorganisasjoner/",
+  "source_type": "official",
+  "aim": "stronger organisations and better integration work among local immigrant organisations in Oslo",
+  "amount_text": "Not stated on the scheme page. The 2026 decision document says NOK 1,734,000 was awarded in total across all successful applicants.",
+  "documents_text": "Statutes must be attached, also by organisations that sent them in earlier years. Every applicant must have a member list. Recipients later file an annual report and accounts.",
+  "deadline": {
+   "kind": "fixed",
+   "iso": "2026-02-02",
+   "inferred": false,
+   "text": "2 February 2026, according to the 2026 decision document. The scheme page says the 2026 deadline has passed."
+  },
+  "retrieved_on": "2026-10-19",
+  "requirements": [
+   {
+    "text": "Local organisation based in Oslo",
+    "evidence_excerpt": "The scheme funds local, member-based immigrant organisations in Oslo. National organisations apply to the Directorate of Integration and Diversity (IMDi) instead.",
+    "rule": [
+     {
+      "if": {
+       "scope": "national"
+      },
+      "out": [
+       "not_met",
+       "National organisations apply to IMDi instead."
+      ]
+     },
+     {
+      "if": {
+       "location": [
+        "norway",
+        "abroad"
+       ]
+      },
+      "out": [
+       "not_met",
+       "The scheme is for organisations in Oslo."
+      ]
+     },
+     {
+      "out": [
+       "met",
+       "Local organisation in Oslo."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Immigrant organisation",
+    "evidence_excerpt": "Support goes to immigrant organisations that are member-based.",
+    "rule": [
+     {
+      "if": {
+       "immigrantOrg": "yes"
+      },
+      "out": [
+       "met",
+       "You describe the organisation as founded by and for people with immigrant background."
+      ]
+     },
+     {
+      "if": {
+       "immigrantOrg": "no"
+      },
+      "out": [
+       "not_met",
+       "The scheme is for immigrant organisations."
+      ]
+     },
+     {
+      "out": [
+       "unknown",
+       "Confirm that the organisation counts as an immigrant organisation."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Member-based, with a member list",
+    "evidence_excerpt": "All organisations must have a member list.",
+    "rule": [
+     {
+      "if": {
+       "membership": "list"
+      },
+      "out": [
+       "met",
+       "You have members and a list."
+      ]
+     },
+     {
+      "if": {
+       "membership": "nolist"
+      },
+      "out": [
+       "conditional",
+       "Create a member list before you apply. It is required."
+      ]
+     },
+     {
+      "if": {
+       "membership": "no"
+      },
+      "out": [
+       "not_met",
+       "The scheme is for member-based organisations."
+      ]
+     },
+     {
+      "out": [
+       "unknown",
+       "Confirm whether you have members and a list."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Statutes attached to the application",
+    "evidence_excerpt": "All applicants must attach their statutes.",
+    "rule": [
+     {
+      "if": {
+       "statutes": "yes"
+      },
+      "out": [
+       "met",
+       "Your statutes are ready."
+      ]
+     },
+     {
+      "out": [
+       "conditional",
+       "Have your statutes ready to attach."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "No operating grant from another state scheme",
+    "evidence_excerpt": "The 2026 decision document says no operating grant is given to organisations that already receive one from another state scheme.",
+    "source_url": "https://www.oslo.kommune.no/get-file/1601608/852726603f14939d14f216ca074bb74103a7788e87baa9e0f33a2d7a3fc0c517",
+    "source_label": "2026 decision document",
+    "rule": [
+     {
+      "out": [
+       "unknown",
+       "Check whether you receive operating support from another state scheme."
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "slug": "nav-poverty-user-orgs",
+  "title": "User-run organisations working against poverty",
+  "funder": "NAV (Arbeids- og velferdsetaten)",
+  "source_url": "https://www.nav.no/samarbeidspartner/tilskudd-brukerstyrte-organisasjoner",
+  "source_type": "official",
+  "aim": "user-run organisations that work against poverty and give their members a say in decisions that affect them",
+  "amount_text": "Not stated in what we read.",
+  "documents_text": "Statutes are required with a first application. The page lists an email address for questions about the scheme. Recipients are prioritised for a three-year period.",
+  "deadline": {
+   "kind": "closed",
+   "text": "The page says the deadline for 2026 has passed. It gives no date for the next round."
+  },
+  "retrieved_on": "2026-10-19",
+  "requirements": [
+   {
+    "text": "Registered in Frivillighetsregisteret",
+    "evidence_excerpt": "Organisations and foundations that receive support must be registered in Frivillighetsregisteret.",
+    "rule": [
+     {
+      "if": {
+       "registered": "yes"
+      },
+      "out": [
+       "met",
+       "Your profile says you are registered."
+      ]
+     },
+     {
+      "if": {
+       "registered": "no"
+      },
+      "out": [
+       "not_met",
+       "Registration is required."
+      ]
+     },
+     {
+      "out": [
+       "unknown",
+       "Check whether you are registered."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Works against poverty",
+    "evidence_excerpt": "The grant goes to user-run organisations that work against poverty.",
+    "rule": [
+     {
+      "if": {
+       "focus": "poverty"
+      },
+      "out": [
+       "met",
+       "Your main field is poverty and social inclusion."
+      ]
+     },
+     {
+      "out": [
+       "not_met",
+       "Your main field is not poverty work."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Run by the people it serves",
+    "evidence_excerpt": "The grant goes to organisations driven by the target group, where users take an active part in decisions that affect them.",
+    "rule": [
+     {
+      "if": {
+       "userRun": "yes"
+      },
+      "out": [
+       "met",
+       "Your profile says the organisation is user-run."
+      ]
+     },
+     {
+      "if": {
+       "userRun": "no"
+      },
+      "out": [
+       "not_met",
+       "The scheme is for user-run organisations."
+      ]
+     },
+     {
+      "out": [
+       "unknown",
+       "Confirm that users run the organisation and take part in decisions."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Local organisations are normally co-funded by local authorities",
+    "evidence_excerpt": "Locally rooted organisations are normally expected to be partly funded by local authorities.",
+    "rule": [
+     {
+      "if": {
+       "scope": "national"
+      },
+      "out": [
+       "met",
+       "This applies to locally rooted organisations. You reported national reach."
+      ]
+     },
+     {
+      "out": [
+       "unknown",
+       "Check whether your municipality co-funds you."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "First-time applicants show cooperation with national organisations",
+    "evidence_excerpt": "First-time applicants should be able to show cooperation with national organisations and networks doing similar work.",
+    "rule": [
+     {
+      "out": [
+       "unknown",
+       "If this is your first application, prepare examples of that cooperation."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Statutes attached to a first application",
+    "evidence_excerpt": "The organisation’s statutes must be sent in with a first application.",
+    "rule": [
+     {
+      "if": {
+       "statutes": "yes"
+      },
+      "out": [
+       "met",
+       "Your statutes are ready."
+      ]
+     },
+     {
+      "out": [
+       "conditional",
+       "Have your statutes ready to attach."
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "slug": "oslo-culture-core",
+  "title": "Oslo: operating grants for arts and culture organisations",
+  "funder": "Oslo kommune, Kulturetaten",
+  "source_url": "https://www.oslo.kommune.no/tilskudd-legater-og-stipend/driftstilskudd-til-kunst-og-kulturinstitusjoner/",
+  "source_type": "official",
+  "aim": "quality and diversity in Oslo’s arts and culture offering, made available to as many people as possible",
+  "amount_text": "Not stated in what we read.",
+  "documents_text": "Upload last year’s annual accounts and annual report, final or preliminary. To submit, someone in your organisation needs the Altinn roles “kommunale tjenester” and “Post/arkiv”.",
+  "deadline": {
+   "kind": "recurring",
+   "rules": [
+    [
+     4,
+     1
+    ]
+   ],
+   "text": "The annual deadline is 1 April for the following year, and the application form opens in early February. The page does not yet announce the next round."
+  },
+  "retrieved_on": "2026-10-19",
+  "requirements": [
+   {
+    "text": "Works in arts and culture",
+    "evidence_excerpt": "Organisations, institutions and businesses in the arts and culture field can apply.",
+    "rule": [
+     {
+      "if": {
+       "focus": "arts"
+      },
+      "out": [
+       "met",
+       "Your main field is arts and culture."
+      ]
+     },
+     {
+      "out": [
+       "not_met",
+       "Your main field is not arts and culture."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Activity takes place in Oslo",
+    "evidence_excerpt": "The scheme supports Oslo’s arts and culture offering.",
+    "rule": [
+     {
+      "if": {
+       "location": "oslo"
+      },
+      "out": [
+       "met",
+       "You are based in Oslo."
+      ]
+     },
+     {
+      "out": [
+       "conditional",
+       "Confirm that your activity takes place in Oslo."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Not an excluded type of organisation",
+    "evidence_excerpt": "No grants go to organisations with clearly commercial operations, fundraising as their purpose, or a scope and profile limited to the local community.",
+    "rule": [
+     {
+      "out": [
+       "unknown",
+       "Check your scope against these exclusions before you apply."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Annual accounts and report ready to upload",
+    "evidence_excerpt": "Last year’s annual accounts and annual report must be uploaded with the application.",
+    "rule": [
+     {
+      "if": {
+       "accounts": "yes"
+      },
+      "out": [
+       "met",
+       "Your accounts and report are ready."
+      ]
+     },
+     {
+      "out": [
+       "conditional",
+       "Prepare final or preliminary accounts and an annual report."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Someone holds the required Altinn roles",
+    "evidence_excerpt": "Submitting requires the Altinn roles “kommunale tjenester” and “Post/arkiv”.",
+    "rule": [
+     {
+      "out": [
+       "unknown",
+       "Check who in your organisation holds these roles."
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "slug": "tonsberg-foundations",
+  "title": "Tønsbergstiftelsene: general, religious and cultural purposes",
+  "funder": "Foundation for Tønsberg municipality, as listed by an aggregator",
+  "source_url": "https://www.kindora.co/en/funders/stiftelsen-til-stotte-for-allmennyttige-religiose-og-kulturelle-formal-i-tonsberg-kommune",
+  "source_type": "aggregator",
+  "aim": "activities that benefit residents of Tønsberg and surroundings",
+  "amount_text": "Not stated in what we read.",
+  "documents_text": "Not stated. The aggregator says the final criteria are in each call on the foundation’s own website.",
+  "deadline": {
+   "kind": "recurring",
+   "rules": [
+    [
+     2,
+     15
+    ],
+    [
+     10,
+     15
+    ]
+   ],
+   "text": "Two fixed deadlines a year, 15 February and 15 October, according to the aggregator. Its own “next deadline”, 15 October 2026, has already passed."
+  },
+  "retrieved_on": "2026-10-19",
+  "requirements": [
+   {
+    "text": "Applicant type is among those listed",
+    "evidence_excerpt": "The aggregator lists associations, voluntary organisations, cultural actors, congregations, schools and non-profit businesses.",
+    "rule": [
+     {
+      "out": [
+       "met",
+       "Voluntary organisations are listed."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Activity benefits people in Tønsberg and surroundings",
+    "evidence_excerpt": "The activity must benefit residents of Tønsberg and the surrounding area.",
+    "rule": [
+     {
+      "out": [
+       "conditional",
+       "Eligible only if your project benefits people in the Tønsberg area."
+      ]
+     }
+    ]
+   },
+   {
+    "text": "Criteria in the current call",
+    "evidence_excerpt": "The aggregator says final criteria appear in each call on the foundation’s website. We did not read that site.",
+    "rule": [
+     {
+      "out": [
+       "unknown",
+       "Read the current call on the foundation’s own website."
+      ]
+     }
+    ]
+   }
+  ]
+ }
+]

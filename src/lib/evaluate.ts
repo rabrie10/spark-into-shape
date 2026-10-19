@@ -1,6 +1,7 @@
 export type Status = "met" | "not_met" | "conditional" | "unknown";
 export type Verdict = "likely" | "check" | "conditional" | "notfit";
-export type Profile = Record<string, string>;
+export type ProfileKey = "name" | "location" | "focus" | "scope" | "registered" | "membership" | "immigrantOrg" | "userRun" | "youth" | "statutes" | "accounts" | "partners";
+export type Profile = Partial<Record<ProfileKey, string>>;
 export type RuleStep = { if?: Record<string, string | string[]>; out: [Status, string] };
 export type Requirement = {
   text: string;
@@ -32,7 +33,7 @@ export function evaluateRequirement(profile: Profile, rule: RuleStep[]): Result 
   for (const step of rule) {
     if (!step.if) return { status: step.out[0], reason: step.out[1] };
     const ok = Object.entries(step.if).every(([k, v]) => {
-      const val = profile[k];
+      const val = (profile as Record<string, string | undefined>)[k];
       if (val === undefined || val === "") return false;
       return Array.isArray(v) ? v.includes(val) : v === val;
     });
@@ -53,7 +54,7 @@ export function evaluateGrant(profile: Profile, requirements: Requirement[]) {
   return { results, verdict: verdictOf(results) };
 }
 
-export type DeadlineState = { state: "open" | "closed" | "expected"; label: string; date?: Date };
+export type DeadlineState = { state: "open" | "closed" | "expected"; label: string; date?: Date | undefined };
 
 const fmt = (d: Date) =>
   d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
@@ -77,7 +78,7 @@ export function deadlineState(deadline: Deadline, today: Date): DeadlineState {
     .flatMap((yr) => deadline.rules.map(([m, day]) => new Date(Date.UTC(yr, m - 1, day))))
     .filter((d) => d.getTime() > t)
     .sort((a, b) => a.getTime() - b.getTime());
-  const next = candidates[0];
+  const next = candidates[0]!;
   return { state: "expected", label: `Next round expected ${fmt(next)}`, date: next };
 }
 

@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
 import seed from "@/data/grants.json";
-import { deadlineState, evaluateGrant, type Grant } from "./evaluate";
+import { deadlineState, evaluateGrant, type Grant, type Profile } from "./evaluate";
 import { EXAMPLES } from "./profile";
 
 const grants = seed as Grant[];
 const g = (slug: string) => grants.find((x) => x.slug === slug)!;
-const [integration, youth, arts] = EXAMPLES.map((e) => e.facts);
+const [integration, youth, arts] = EXAMPLES.map((e) => e.facts) as [Profile, Profile, Profile];
 
 describe("demo verdicts", () => {
   it("youth example vs Erasmus+ is possible with conditions", () => {

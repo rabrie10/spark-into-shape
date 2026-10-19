@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "@/lib/store";
 import { EXAMPLES, FIELDS } from "@/lib/profile";
-import { deadlineState, evaluateGrant, groupOf, verdictOrder, type Profile } from "@/lib/evaluate";
+import { deadlineState, evaluateGrant, groupOf, verdictOrder, type Profile, type ProfileKey } from "@/lib/evaluate";
 import { Card, DeadlineChip, EmptyState, ThirdPartyChip, VerdictChip, btnGhost } from "@/components/grant-ui";
 
 export const Route = createFileRoute("/")({
@@ -28,7 +28,7 @@ function ProfilePanel() {
     setDraft(next);
     clearTimeout(timer.current);
     timer.current = setTimeout(() => {
-      const changed = Object.keys(next).filter((k) => next[k] !== prev[k]);
+      const changed = Object.keys(next).filter((k) => next[k as ProfileKey] !== prev[k as ProfileKey]);
       setProfile(next, changed);
       setSaved("Saved");
       setTimeout(() => setSaved(""), 1800);
@@ -60,8 +60,8 @@ function ProfilePanel() {
             {f.label}
             <select
               className="min-h-11 rounded-lg border border-line bg-surface px-3 text-base font-normal"
-              value={draft[f.key] ?? ""}
-              onChange={(e) => commit({ ...draft, [f.key]: e.target.value }, draft)}
+              value={draft[f.key as ProfileKey] ?? ""}
+              onChange={(e) => commit({ ...draft, [f.key as ProfileKey]: e.target.value }, draft)}
             >
               <option value="">Not answered</option>
               {f.options.map(([v, l]) => <option key={v} value={v}>{l}</option>)}

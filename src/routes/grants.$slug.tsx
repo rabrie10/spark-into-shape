@@ -58,7 +58,7 @@ function Detail() {
   const ds = deadlineState(g.deadline, new Date());
   const app = applications[g.slug] ?? { checklist: {}, status: "draft" as const };
   const todo = g.requirements
-    .map((r, i) => ({ r, res: results[i], id: `req-${i}` }))
+    .map((r, i) => ({ r, res: results[i]!, id: `req-${i}` }))
     .filter((x) => x.res.status === "conditional" || x.res.status === "unknown");
   const items = [...todo.map((t) => ({ id: t.id, text: `${t.r.text}: ${t.res.reason}` })), { id: "docs", text: "Read what documents the funder requires" }];
 
@@ -97,7 +97,7 @@ function Detail() {
       <Card className="mt-3 px-5">
         <ul>
           {g.requirements.map((r, i) => (
-            <EvidenceRow key={i} req={r} result={results[i]} fallbackUrl={g.source_url} retrieved={g.retrieved_on} />
+            <EvidenceRow key={i} req={r} result={results[i]!} fallbackUrl={g.source_url} retrieved={g.retrieved_on} />
           ))}
         </ul>
       </Card>

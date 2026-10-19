@@ -49,7 +49,7 @@ function AddPage() {
   };
 
   const approve = () => {
-    const f = Object.fromEntries(fields!.map((x) => [x.key, x.value.trim()]));
+    const f = Object.fromEntries(fields!.map((x) => [x.key, x.value.trim()])) as { title?: string; funder?: string; aim?: string; amount_text?: string; deadline?: string; eligibility?: string };
     const slug = "added-" + Date.now();
     const today = new Date().toISOString().slice(0, 10);
     const g: Grant = {

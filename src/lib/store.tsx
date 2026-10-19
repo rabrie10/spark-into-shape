@@ -7,7 +7,7 @@ export type AuditEvent = { at: string; type: string; detail: string };
 export type Application = {
   checklist: Record<string, boolean>;
   status: "draft" | "verified";
-  verified_at?: string;
+  verified_at?: string | undefined;
   match_snapshot?: unknown;
   draft_text?: string;
 };
@@ -19,7 +19,7 @@ type State = {
 };
 
 const KEY = "grantastic-v1";
-const initial = (): State => ({ profile: { ...EXAMPLES[0].facts }, added: [], applications: {}, audit: [] });
+const initial = (): State => ({ profile: { ...EXAMPLES[0]!.facts }, added: [], applications: {}, audit: [] });
 
 type Ctx = State & {
   grants: Grant[];
